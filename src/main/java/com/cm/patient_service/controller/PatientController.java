@@ -16,7 +16,6 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-
 @RestController
 @RequestMapping("/patients")
 public class PatientController {
@@ -27,16 +26,17 @@ public class PatientController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PatientResponseDTO>> getPatients(){
+    public ResponseEntity<List<PatientResponseDTO>> getPatients() {
         List<PatientResponseDTO> patients = patientService.getPatients();
         return ResponseEntity.ok().body(patients);
     }
 
     @PostMapping
     public ResponseEntity<PatientResponseDTO> createPatient(@Valid @RequestBody PatientRequestDTO patientRequestDTO) {
-        //TODO: process POST request
+        // TODO: process POST request
         PatientResponseDTO patientResponseDTO = patientService.createPatient(patientRequestDTO);
+
         return ResponseEntity.ok().body(patientResponseDTO);
     }
-    
+
 }
