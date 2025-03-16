@@ -1,5 +1,5 @@
 package com.cm.patient_service.model;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
@@ -28,10 +28,10 @@ private String email;
 private String address;
 
 @NotNull
-private LocalDateTime dateOfBirth;
+private LocalDate dateOfBirth;
 
 @NotNull
-private LocalDateTime registerDate;
+private LocalDate registeredDate;
 
 public UUID getId() {
     return id;
@@ -65,19 +65,19 @@ public void setAddress(String address) {
     this.address = address;
 }
 
-public LocalDateTime getDateOfBirth() {
+public LocalDate getDateOfBirth() {
     return dateOfBirth;
 }
 
-public void setDateOfBirth(LocalDateTime dateOfBirth) {
+public void setDateOfBirth(LocalDate dateOfBirth) {
     this.dateOfBirth = dateOfBirth;
 }
 
-public LocalDateTime getRegisterDate() {
-    return registerDate;
+public LocalDate getRegisteredDate() {
+    return registeredDate;
 }
 
-public void setRegisterDate(LocalDateTime registerDate) {
-    this.registerDate = registerDate;
+public void setRegisteredDate(LocalDate registeredDate) {
+    this.registeredDate = registeredDate;
 } 
 }

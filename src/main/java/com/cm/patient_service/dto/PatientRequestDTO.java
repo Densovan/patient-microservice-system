@@ -19,6 +19,18 @@ public class PatientRequestDTO {
     @NotBlank(message = "Registered date is required")
     private String registerDate;
 
+    @NotBlank(message = "Address is required")
+    private String address;
+
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public String getName() {
         return name;
     }
@@ -43,11 +55,11 @@ public class PatientRequestDTO {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getRegisterDate() {
+    public String getRegisteredDate() {
         return registerDate;
     }
 
-    public void setRegisterDate(String registerDate) {
+    public void setRegisteredDate(String registerDate) {
         this.registerDate = registerDate;
     }
 
