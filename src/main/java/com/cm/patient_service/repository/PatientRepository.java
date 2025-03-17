@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.cm.patient_service.model.Patient;
 
 @Repository
-public interface PatientRepository extends JpaRepository<Patient,UUID> {
-    
+public interface PatientRepository extends JpaRepository<Patient, UUID> {
+    boolean existsByEmail(String email);
+
 }

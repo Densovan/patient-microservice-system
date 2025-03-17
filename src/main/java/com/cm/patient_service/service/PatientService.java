@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.cm.patient_service.dto.PatientRequestDTO;
 import com.cm.patient_service.dto.PatientResponseDTO;
+import com.cm.patient_service.exception.EmailAlreadyExistsException;
 import com.cm.patient_service.mapper.PatientMapper;
 import com.cm.patient_service.model.Patient;
 import com.cm.patient_service.repository.PatientRepository;
@@ -14,7 +15,7 @@ import com.cm.patient_service.repository.PatientRepository;
 public class PatientService {
     private PatientRepository patientRepository;
 
-    //dependency injection
+    // dependency injection
     public PatientService(PatientRepository patientRepository) {
         this.patientRepository = patientRepository;
     }
@@ -24,14 +25,22 @@ public class PatientService {
 
         // we can use two ways of code like this
         List<PatientResponseDTO> patientResponseDTOs = patients.stream().map(PatientMapper::toDTO).toList();
-        // List<PatientResponseDTO> patientResponseDTOs = patients.stream().map(patient -> PatientMapper.toDTO(patient)).toList();
+        // List<PatientResponseDTO> patientResponseDTOs = patients.stream().map(patient
+        // -> PatientMapper.toDTO(patient)).toList();
         return patientResponseDTOs;
-        
-    } 
+
+    }
 
     public PatientResponseDTO createPatient(PatientRequestDTO patientRequestDTO) {
+        if (patientRepository.existsByEmail(patientRequestDTO.getEmail())) {
+            throw new EmailAlreadyExistsException(
+                    "A patient with this email" + "already exist" +
+                            patientRequestDTO.getEmail());
+        }
+
         Patient newPatient = patientRepository.save(PatientMapper.toModel(patientRequestDTO));
 
+        // an email address must be unique
         return PatientMapper.toDTO(newPatient);
     }
 }
