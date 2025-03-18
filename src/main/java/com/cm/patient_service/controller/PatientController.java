@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/patients")
@@ -57,6 +58,12 @@ public class PatientController {
     public ResponseEntity<Void> deletePatient(@PathVariable UUID id) {
         patientService.deletePatient(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<PatientResponseDTO> getPatient(@PathVariable UUID id) {
+        PatientResponseDTO patientResponseDTO = patientService.getPatient(id);
+        return ResponseEntity.ok().body(patientResponseDTO);
     }
 
 }
