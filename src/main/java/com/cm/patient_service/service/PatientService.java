@@ -2,6 +2,7 @@ package com.cm.patient_service.service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
@@ -72,6 +73,15 @@ public class PatientService {
     // delete patient
     public void deletePatient(UUID id) {
         patientRepository.deleteById(id);
+    }
+
+    // get patient by id
+    public PatientResponseDTO getPatient(UUID id) {
+        Patient patient = patientRepository.findById(id)
+                .orElseThrow(() -> new PatientNotFoundException("Patient not found with ID" +
+                        id));
+
+        return PatientMapper.toDTO(patient);
     }
 
 }
